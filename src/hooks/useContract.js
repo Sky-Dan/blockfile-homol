@@ -16,7 +16,7 @@ const useContract = () => {
   const handleStoreFile = async (hash) => {
     // console.log(await contract.methods.validate(hash).call());
 
-    // const block = await web3.eth.getBlock('latest');
+    const block = await web3.eth.getBlock('latest');
 
     // const nonce =
     //   (await web3.eth.getTransactionCount(accountAddress, 'pending')) + 1;
@@ -25,7 +25,7 @@ const useContract = () => {
       from: accountAddress,
       to: contractAddress,
       value: web3.utils.toHex(web3.utils.toWei('0', 'ether')),
-      gas: web3.utils.toHex(210000),
+      gas: web3.utils.toHex(block.gasLimit),
       // gasPrice: web3.utils.toHex(210000),
       // gasLimit: block.gasLimit,
       data: await contract.methods.store(hash).encodeABI(),
